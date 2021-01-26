@@ -27,7 +27,7 @@ public class DeveloperServiceImpl implements DeveloperService {
     public Developer getById(Long id) {
         return DEVELOPERS.stream().filter(
                 developer -> developer.getId().equals(id))
-                    .findFirst()
+                .findFirst()
                 .orElse(null);
     }
 

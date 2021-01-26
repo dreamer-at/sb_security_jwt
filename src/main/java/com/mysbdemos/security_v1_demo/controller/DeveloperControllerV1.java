@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -49,17 +50,20 @@ public class DeveloperControllerV1 {
     }
 
     @GetMapping("/{id}/")
+    @PreAuthorize("hasAuthority('developers:read')")
     public Developer getById(@PathVariable Long id) {
         return developerService.getById(id);
     }
 
     @PostMapping
+    @PreAuthorize("hasAuthority('developers:write')")
     @ResponseStatus(HttpStatus.OK)
     public Developer create(@RequestBody Developer developer) {
         return developerService.create(developer);
     }
 
     @DeleteMapping("/{id}/")
+    @PreAuthorize("hasAuthority('developers:write')")
     @ResponseStatus(HttpStatus.OK)
     public void deleteById(@PathVariable Long id) {
         developerService.deleteById(id);
