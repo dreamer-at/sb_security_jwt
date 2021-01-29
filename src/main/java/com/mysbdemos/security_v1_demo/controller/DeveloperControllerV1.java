@@ -42,30 +42,31 @@ public class DeveloperControllerV1 {
                 .allow(HttpMethod.GET, HttpMethod.PUT, HttpMethod.DELETE, HttpMethod.OPTIONS)
                 .build();
     }
-    private final DeveloperServiceImpl developerService;
+
+    private final DeveloperServiceImpl service;
 
     @GetMapping
     public List<Developer> getAll() {
-        return developerService.getAll();
+        return service.getAll();
     }
 
     @GetMapping("/{id}/")
     @PreAuthorize("hasAuthority('developers:read')")
     public Developer getById(@PathVariable Long id) {
-        return developerService.getById(id);
+        return service.getById(id);
     }
 
     @PostMapping
     @PreAuthorize("hasAuthority('developers:write')")
     @ResponseStatus(HttpStatus.OK)
     public Developer create(@RequestBody Developer developer) {
-        return developerService.create(developer);
+        return service.create(developer);
     }
 
     @DeleteMapping("/{id}/")
     @PreAuthorize("hasAuthority('developers:write')")
     @ResponseStatus(HttpStatus.OK)
     public void deleteById(@PathVariable Long id) {
-        developerService.deleteById(id);
+        service.deleteById(id);
     }
 }
