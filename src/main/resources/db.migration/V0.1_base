@@ -1,0 +1,57 @@
+CREATE SCHEMA auth;
+ALTER SCHEMA auth OWNER TO postgres;
+
+CREATE TABLE auth.app_user
+(
+    id           UUID         NOT NULL,
+    updated_date TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    created_date TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    email        VARCHAR(255) NOT NULL,
+    first_name   VARCHAR(255) NOT NULL,
+    last_name    VARCHAR(255) NOT NULL,
+    password     VARCHAR(255) NOT NULL,
+    avatar_path  VARCHAR(1024),
+    is_enabled   BOOLEAN      NOT NULL DEFAULT TRUE,
+
+    CONSTRAINT pk_auth_app_user
+        PRIMARY KEY (id),
+    CONSTRAINT email_unq
+        UNIQUE (email)
+);
+
+ALTER TABLE auth.app_user
+    OWNER TO postgres;
+
+CREATE TABLE auth.role
+(
+    id   BIGINT NOT NULL,
+    name VARCHAR(32),
+
+    CONSTRAINT pk_org_rol
+        PRIMARY KEY (id),
+    CONSTRAINT role_unq
+        UNIQUE (name)
+);
+
+ALTER TABLE auth.role
+    OWNER TO postgres;
+
+CREATE TABLE auth.app_user_role
+(
+    user_id UUID   NOT NULL,
+    role_id BIGINT NOT NULL,
+
+    CONSTRAINT pk_auth_app_user_role
+        PRIMARY KEY (user_id, role_id),
+    CONSTRAINT fk_auth_app_user_role_app_user
+        FOREIGN KEY (user_id)
+            REFERENCES auth.app_user (id)
+            ON DELETE CASCADE,
+    CONSTRAINT fk_auth_app_user_role_role
+        FOREIGN KEY (role_id)
+            REFERENCES auth.role (id)
+            ON DELETE CASCADE
+);
+
+ALTER TABLE auth.app_user_role
+    OWNER TO postgres;
