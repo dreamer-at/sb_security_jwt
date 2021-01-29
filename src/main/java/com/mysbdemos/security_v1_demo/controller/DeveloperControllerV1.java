@@ -12,16 +12,16 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.UUID;
 
-@RestController
-@AllArgsConstructor
-@RequestMapping("/api/v1/developers")
+// @RestController
+// @AllArgsConstructor
+// @RequestMapping("/api/v1/developers")
 public class DeveloperControllerV1 {
 
-    /**
+/*    *//**
      * Responds allowed http methods in the header.
      * <p>
      * This always responds with HTTP-Code 200
-     */
+     *//*
     @RequestMapping(method = RequestMethod.OPTIONS)
     ResponseEntity<?> collectionOptions() {
         return ResponseEntity
@@ -30,11 +30,11 @@ public class DeveloperControllerV1 {
                 .build();
     }
 
-    /**
+    *//**
      * Responds allowed http methods the header.
      * <p>
      * This always responds with HTTP-Code 200
-     */
+     *//*
     @RequestMapping(value = "{id}", method = RequestMethod.OPTIONS)
     ResponseEntity<?> singularOptions(@SuppressWarnings("unused") @PathVariable(required = false) UUID id) {
         return ResponseEntity
@@ -68,5 +68,5 @@ public class DeveloperControllerV1 {
     @ResponseStatus(HttpStatus.OK)
     public void deleteById(@PathVariable Long id) {
         service.deleteById(id);
-    }
+    }*/
 }
