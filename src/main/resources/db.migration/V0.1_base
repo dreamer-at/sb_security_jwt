@@ -1,4 +1,4 @@
-CREATE SCHEMA auth;
+CREATE SCHEMA IF NOT EXISTS auth;
 ALTER SCHEMA auth OWNER TO postgres;
 
 CREATE TABLE auth.app_user
@@ -24,7 +24,7 @@ ALTER TABLE auth.app_user
 
 CREATE TABLE auth.role
 (
-    id   BIGINT NOT NULL,
+    id   BIGSERIAL NOT NULL,
     name VARCHAR(32),
 
     CONSTRAINT pk_org_rol

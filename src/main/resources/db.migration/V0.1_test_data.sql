@@ -22,7 +22,7 @@ $$;
 DO
 $BODY$
     DECLARE
-        user_1_uuid    uuid        := uuid_generate_v5();
+        user_1_uuid    uuid        := uuid_generate_v4();
         user_2_uuid    uuid        := uuid_generate_v4();
         user_3_uuid    uuid        := uuid_generate_v4();
         user_1_email   varchar(16) := 'owner1@email.com';
@@ -33,17 +33,17 @@ $BODY$
         viewer_role_id int         := nextval('auth.role_id_seq'::regclass);
 
     BEGIN
-        INSERT INTO auth.users(id, email, first_name, last_name, password, avatar_path, is_enabled)
+        INSERT INTO auth.app_user(id, email, first_name, last_name, password, avatar_path, is_enabled)
         VALUES (user_1_uuid, user_1_email, 'Ludwig', 'Beethoven',
-                concat('{bcrypt}', crypt('owner1', gen_salt('bf', 8))), null, true),
+                concat('{bcrypt}', crypt('user1', gen_salt('bf', 12))), null, true),
 
                (user_2_uuid, user_2_email, 'Johann', 'Sebastian',
-                concat('{bcrypt}', crypt('owner2', gen_salt('bf', 8))), null, true),
+                concat('{bcrypt}', crypt('user2', gen_salt('bf', 12))), null, true),
 
                (user_3_uuid, user_3_email, 'Johannes', 'Brahms',
-                concat('{bcrypt}', crypt('user1', gen_salt('bf', 8))), null, true);
+                concat('{bcrypt}', crypt('user3', gen_salt('bf', 12))), null, true);
 
-        INSERT INTO auth.roles(id, name)
+        INSERT INTO auth.role(id, name)
         VALUES (admin_role_id, 'ROLE_ADMIN'),
                (user_role_id, 'ROLE_USER'),
                (viewer_role_id, 'ROLE_DOCUMENT_VIEWER');
