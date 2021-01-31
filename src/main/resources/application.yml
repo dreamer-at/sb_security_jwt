@@ -4,6 +4,8 @@ server:
     context-path: /api
 
 spring:
+  main:
+    banner-mode: "off"
   jmx:
     enabled: false
   datasource:
@@ -11,3 +13,19 @@ spring:
     username: postgres
     password: postgres
     url: jdbc:postgresql://localhost:5432/sbdemo
+  flyway:
+    enabled: false
+    baseline-on-migrate: true
+    baseline-version: 0.0.1_000
+    url: ${spring.datasource.url}
+    user: ${spring.datasource.username:flyway}
+    password: ${spring.datasource.username:flyway}
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQL9Dialect
+    show-sql: true
+    open-in-view: true
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        format_sql: true
