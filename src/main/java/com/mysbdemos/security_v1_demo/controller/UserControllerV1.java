@@ -1,21 +1,9 @@
 package com.mysbdemos.security_v1_demo.controller;
 
-import com.mysbdemos.security_v1_demo.model.Developer;
-import com.mysbdemos.security_v1_demo.service.DeveloperServiceImpl;
-import lombok.AllArgsConstructor;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-import java.util.UUID;
-
 // @RestController
 // @AllArgsConstructor
 // @RequestMapping("/api/v1/developers")
-public class DeveloperControllerV1 {
+public class UserControllerV1 {
 
 /*    *//**
      * Responds allowed http methods in the header.
