@@ -11,6 +11,7 @@ CREATE TABLE auth.app_user
     last_name    VARCHAR(255) NOT NULL,
     password     VARCHAR(255) NOT NULL,
     avatar_path  VARCHAR(1024),
+    role         VARCHAR(255),
     is_enabled   BOOLEAN      NOT NULL DEFAULT TRUE,
 
     CONSTRAINT pk_auth_app_user
@@ -22,7 +23,7 @@ CREATE TABLE auth.app_user
 ALTER TABLE auth.app_user
     OWNER TO postgres;
 
-CREATE TABLE auth.role
+/*CREATE TABLE auth.role
 (
     id   BIGSERIAL NOT NULL,
     name VARCHAR(32),
@@ -34,9 +35,9 @@ CREATE TABLE auth.role
 );
 
 ALTER TABLE auth.role
-    OWNER TO postgres;
+    OWNER TO postgres;*/
 
-CREATE TABLE auth.app_user_role
+/*CREATE TABLE auth.app_user_role
 (
     user_id UUID   NOT NULL,
     role_id BIGINT NOT NULL,
@@ -54,4 +55,4 @@ CREATE TABLE auth.app_user_role
 );
 
 ALTER TABLE auth.app_user_role
-    OWNER TO postgres;
+    OWNER TO postgres;*/

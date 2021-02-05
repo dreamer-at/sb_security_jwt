@@ -1,11 +1,9 @@
 package com.mysbdemos.security_v1_demo.model;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
-import javax.validation.constraints.*;
 import java.util.UUID;
 
 @Entity
@@ -14,10 +12,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Table(name = "app_user", schema = "auth", uniqueConstraints = {
-        @UniqueConstraint(columnNames = "email")
-})
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+@Table(name = "app_user")
 public class User extends BaseEntity {
 
     @Id
@@ -28,20 +23,25 @@ public class User extends BaseEntity {
     )
     private UUID id;
 
-    @Email
+    @Column(name = "email")
     private String email;
 
-    @NotBlank
-    private String firstName;
+    @Column(name = "first_name")
+    private String  firstName;
 
-    @NotBlank
+    @Column(name = "last_name")
     private String lastName;
 
-    @NotBlank
+    @Column(name = "password")
     private String password;
 
-    private String avatar_path;
+    @Column(name = "avatar_path")
+    private String avatarPath;
 
     @Builder.Default
+    @Column(name = "is_enabled")
     private Boolean isEnabled = true;
+
+    @Column(name = "role")
+    private Role role;
 }

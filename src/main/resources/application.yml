@@ -5,7 +5,7 @@ server:
 
 spring:
   main:
-    banner-mode: "off"
+    banner-mode: off
   jmx:
     enabled: false
   datasource:

@@ -28,9 +28,9 @@ $BODY$
         user_1_email   varchar(16) := 'owner1@email.com';
         user_2_email   varchar(16) := 'owner2@email.com';
         user_3_email   varchar(16) := 'user1@email.com';
-        admin_role_id  int         := nextval('auth.role_id_seq'::regclass);
+       /* admin_role_id  int         := nextval('auth.role_id_seq'::regclass);
         user_role_id   int         := nextval('auth.role_id_seq'::regclass);
-        viewer_role_id int         := nextval('auth.role_id_seq'::regclass);
+        viewer_role_id int         := nextval('auth.role_id_seq'::regclass);*/
 
     BEGIN
         INSERT INTO auth.app_user(id, email, first_name, last_name, password, avatar_path, is_enabled)
@@ -43,10 +43,10 @@ $BODY$
                (user_3_uuid, user_3_email, 'Johannes', 'Brahms',
                 concat('{bcrypt}', crypt('user3', gen_salt('bf', 12))), null, true);
 
-        INSERT INTO auth.role(id, name)
+       /* INSERT INTO auth.role(id, name)
         VALUES (admin_role_id, 'ROLE_ADMIN'),
                (user_role_id, 'ROLE_USER'),
-               (viewer_role_id, 'ROLE_DOCUMENT_VIEWER');
+               (viewer_role_id, 'ROLE_DOCUMENT_VIEWER');*/
 
     END;
 $BODY$ LANGUAGE plpgsql;
