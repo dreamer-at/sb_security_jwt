@@ -12,7 +12,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Table(name = "app_user")
+@Table(name = "app_user", schema = "auth")
 public class User extends BaseEntity {
 
     @Id
@@ -38,10 +38,11 @@ public class User extends BaseEntity {
     @Column(name = "avatar_path")
     private String avatarPath;
 
+    @Enumerated(value = EnumType.STRING)
+    @Column(name = "role")
+    private Role role;
+
     @Builder.Default
     @Column(name = "is_enabled")
     private Boolean isEnabled = true;
-
-    @Column(name = "role")
-    private Role role;
 }
