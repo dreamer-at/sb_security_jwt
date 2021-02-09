@@ -1,7 +1,7 @@
 package com.mysbdemos.security_v1_demo.controller;
 
 import com.mysbdemos.security_v1_demo.dto.AuthenticateDTO;
-import com.mysbdemos.security_v1_demo.service.user.AuthService;
+import com.mysbdemos.security_v1_demo.service.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

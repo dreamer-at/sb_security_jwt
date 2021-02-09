@@ -1,6 +1,6 @@
 package com.mysbdemos.security_v1_demo.config.security;
 
-import com.mysbdemos.security_v1_demo.service.user.Impl.UserDetailsServiceImpl;
+import com.mysbdemos.security_v1_demo.service.Impl.UserDetailsServiceImpl;
 import com.mysbdemos.security_v1_demo.util.exception.UnauthorizedException;
 import io.jsonwebtoken.*;
 import lombok.RequiredArgsConstructor;

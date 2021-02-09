@@ -1,11 +1,11 @@
-package com.mysbdemos.security_v1_demo.service.user.Impl;
+package com.mysbdemos.security_v1_demo.service.Impl;
 
 
 import com.mysbdemos.security_v1_demo.config.security.JwtTokenProvider;
 import com.mysbdemos.security_v1_demo.dto.AuthenticateDTO;
 import com.mysbdemos.security_v1_demo.model.User;
-import com.mysbdemos.security_v1_demo.service.user.AuthService;
-import com.mysbdemos.security_v1_demo.service.user.UserService;
+import com.mysbdemos.security_v1_demo.service.AuthService;
+import com.mysbdemos.security_v1_demo.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;

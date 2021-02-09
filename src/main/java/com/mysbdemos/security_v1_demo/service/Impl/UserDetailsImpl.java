@@ -1,4 +1,4 @@
-package com.mysbdemos.security_v1_demo.service.user.Impl;
+package com.mysbdemos.security_v1_demo.service.Impl;
 
 import com.mysbdemos.security_v1_demo.model.User;
 import lombok.Data;

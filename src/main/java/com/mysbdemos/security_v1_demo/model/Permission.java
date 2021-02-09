@@ -2,8 +2,8 @@ package com.mysbdemos.security_v1_demo.model;
 
 public enum Permission {
 
-    DEVELOPERS_READ("developers:read"),
-    DEVELOPERS_WRITE("developers:write");
+    USERS_READ("users:read"),
+    USERS_WRITE("users:write");
 
     private final String permission;
 

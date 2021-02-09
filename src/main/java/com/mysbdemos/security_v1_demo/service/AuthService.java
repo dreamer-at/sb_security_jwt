@@ -1,4 +1,4 @@
-package com.mysbdemos.security_v1_demo.service.user;
+package com.mysbdemos.security_v1_demo.service;
 
 import com.mysbdemos.security_v1_demo.dto.AuthenticateDTO;
 

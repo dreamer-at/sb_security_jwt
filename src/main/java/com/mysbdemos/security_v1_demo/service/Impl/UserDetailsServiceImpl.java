@@ -1,6 +1,6 @@
-package com.mysbdemos.security_v1_demo.service.user.Impl;
+package com.mysbdemos.security_v1_demo.service.Impl;
 
-import com.mysbdemos.security_v1_demo.service.user.UserService;
+import com.mysbdemos.security_v1_demo.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

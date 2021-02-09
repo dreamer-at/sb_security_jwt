@@ -6,7 +6,7 @@ api:
   security:
     jwt:
       expiration-time: 30
-      secret-key: 'secret_key'
+      secret-key: 'key'
       header: 'Authorization'
 
 server:
