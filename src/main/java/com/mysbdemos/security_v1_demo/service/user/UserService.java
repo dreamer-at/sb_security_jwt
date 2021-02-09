@@ -1,4 +1,4 @@
-package com.mysbdemos.security_v1_demo.service;
+package com.mysbdemos.security_v1_demo.service.user;
 
 
 import com.mysbdemos.security_v1_demo.model.User;
@@ -13,7 +13,7 @@ public interface UserService {
 
     Optional<User> getById(UUID id);
 
-    User create(User developer);
+    User create(User user);
 
     void deleteById(UUID id);
 

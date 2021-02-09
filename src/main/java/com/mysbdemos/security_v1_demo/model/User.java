@@ -27,7 +27,7 @@ public class User extends BaseEntity {
     private String email;
 
     @Column(name = "first_name")
-    private String  firstName;
+    private String firstName;
 
     @Column(name = "last_name")
     private String lastName;

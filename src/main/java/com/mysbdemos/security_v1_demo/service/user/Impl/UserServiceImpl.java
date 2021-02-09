@@ -1,13 +1,16 @@
-package com.mysbdemos.security_v1_demo.service;
+package com.mysbdemos.security_v1_demo.service.user.Impl;
 
 import com.mysbdemos.security_v1_demo.model.User;
 import com.mysbdemos.security_v1_demo.repository.UserRepository;
+import com.mysbdemos.security_v1_demo.service.user.UserService;
 import com.mysbdemos.security_v1_demo.util.exception.IsAlreadyExistException;
 import com.mysbdemos.security_v1_demo.util.exception.NotFoundException;
+import com.mysbdemos.security_v1_demo.util.exception.UnauthorizedException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -16,7 +19,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Slf4j
-@Service("UserServiceImpl")
+@Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
@@ -36,8 +39,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User findByEmail(final String email) {
-        return repository.findByEmail(email).orElseThrow(
-                () -> new NotFoundException(User.class.getSimpleName(), "Email", email));
+        return repository.findByEmail(email).map(user -> {
+            if (!user.getIsEnabled()) {
+                throw new UnauthorizedException(String.format("User with email:'%s' is disabled", email));
+            }
+            return user;
+        }).orElseThrow(() ->
+                new UsernameNotFoundException(String.format("User with email '%s' not found! ", email)));
     }
 
     @Override
@@ -55,9 +63,5 @@ public class UserServiceImpl implements UserService {
                 () -> {
                     throw new NotFoundException("User", "ID", id);
                 });
-    }
-
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return authorities;
     }
 }

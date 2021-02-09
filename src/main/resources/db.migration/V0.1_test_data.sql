@@ -33,15 +33,15 @@ $BODY$
         viewer_role_id int         := nextval('auth.role_id_seq'::regclass);*/
 
     BEGIN
-        INSERT INTO auth.app_user(id, email, first_name, last_name, password, avatar_path, is_enabled)
+        INSERT INTO auth.app_user(id, email, first_name, last_name, password, avatar_path, role, is_enabled)
         VALUES (user_1_uuid, user_1_email, 'Ludwig', 'Beethoven',
-                concat('{bcrypt}', crypt('user1', gen_salt('bf', 12))), null, true),
+                crypt('user1', gen_salt('bf', 12)), null, 'ADMIN', true),
 
                (user_2_uuid, user_2_email, 'Johann', 'Sebastian',
-                concat('{bcrypt}', crypt('user2', gen_salt('bf', 12))), null, true),
+                concat('{bcrypt}', crypt('user2', gen_salt('bf', 12))), null, 'USER',true),
 
                (user_3_uuid, user_3_email, 'Johannes', 'Brahms',
-                concat('{bcrypt}', crypt('user3', gen_salt('bf', 12))), null, true);
+                concat('{bcrypt}', crypt('user3', gen_salt('bf', 12))), null, 'USER', true);
 
        /* INSERT INTO auth.role(id, name)
         VALUES (admin_role_id, 'ROLE_ADMIN'),

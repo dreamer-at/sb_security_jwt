@@ -1,4 +1,4 @@
-package com.mysbdemos.security_v1_demo.security;
+package com.mysbdemos.security_v1_demo.service.user.Impl;
 
 import com.mysbdemos.security_v1_demo.model.User;
 import lombok.Data;
@@ -10,15 +10,15 @@ import java.util.Collection;
 import java.util.List;
 
 @Data
-public class SecurityUser implements UserDetails {
+public class UserDetailsImpl implements UserDetails {
 
     private final String username;
     private final String password;
     private final List<SimpleGrantedAuthority> authorities;
     private final boolean isActive;
 
-    public SecurityUser(String username, String password, List<SimpleGrantedAuthority> authorities,
-                        boolean isActive) {
+    public UserDetailsImpl(String username, String password, List<SimpleGrantedAuthority> authorities,
+                           boolean isActive) {
         this.username = username;
         this.password = password;
         this.authorities = authorities;
