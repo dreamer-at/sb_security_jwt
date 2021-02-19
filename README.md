@@ -1,1 +1,1 @@
-Spring Boot security demo project
+Spring Boot security jwt demo project
