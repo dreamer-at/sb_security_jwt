@@ -2,9 +2,14 @@ package com.mysbdemos.security_v1_demo.model;
 
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Entity
 @Data
@@ -12,10 +17,13 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Table(name = "app_user", schema = "auth")
+@Table(name = "app_user", schema = "auth", uniqueConstraints = {
+        @UniqueConstraint(columnNames = "email")
+})
 public class User extends BaseEntity {
 
     @Id
+    @Column(length = 16, unique = true, nullable = false, updatable = false)
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(
             name = "UUID",
@@ -38,11 +46,20 @@ public class User extends BaseEntity {
     @Column(name = "avatar_path")
     private String avatarPath;
 
-    @Enumerated(value = EnumType.STRING)
-    @Column(name = "role")
-    private Role role;
-
     @Builder.Default
-    @Column(name = "is_enabled")
-    private Boolean isEnabled = true;
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    @JoinTable(name = "app_user_role", schema = "auth",
+            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
+    private Set<Role> roles = new HashSet<>();
+
+    public void addRole(final Role role) {
+        this.roles.add(role);
+    }
+
+    public Set<? extends GrantedAuthority> getAuthorities() {
+        return roles.stream()
+                .map(it -> new SimpleGrantedAuthority(it.getAuthority()))
+                .collect(Collectors.toUnmodifiableSet());
+    }
 }

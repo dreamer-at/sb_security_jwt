@@ -29,7 +29,7 @@ public class AuthServiceImpl implements AuthService {
         manager.authenticate(
                 new UsernamePasswordAuthenticationToken(email, dto.getPassword()));
         User user = service.findByEmail(dto.getEmail());
-        String token = provider.createToken(dto.getEmail(), user.getRole().name());
+        String token = provider.createToken(dto.getEmail(), ""); // user.getRole().name());
         HashMap<Object, Object> response = new HashMap<>();
         response.put("email", dto.getEmail());
         response.put("token", token);

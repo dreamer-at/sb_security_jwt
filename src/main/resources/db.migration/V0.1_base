@@ -10,7 +10,7 @@ CREATE TABLE auth.app_user
     email        VARCHAR(255) NOT NULL,
     first_name   VARCHAR(255) NOT NULL,
     last_name    VARCHAR(255) NOT NULL,
-    password     VARCHAR(255) NOT NULL,
+    password     VARCHAR(60)  NOT NULL,
     avatar_path  VARCHAR(1024),
     role         VARCHAR(30)  NOT NULL DEFAULT 'USER',
     is_enabled   BOOLEAN      NOT NULL DEFAULT TRUE,
@@ -24,21 +24,25 @@ CREATE TABLE auth.app_user
 ALTER TABLE auth.app_user
     OWNER TO postgres;
 
-/*CREATE TABLE auth.role
+CREATE TABLE auth.role
 (
-    id   BIGSERIAL NOT NULL,
-    name VARCHAR(32),
+    id           BIGSERIAL NOT NULL,
+    updated_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    created_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    is_enabled   BOOLEAN      NOT NULL DEFAULT TRUE,
+    name         VARCHAR(32),
+    description  VARCHAR(255),
 
-    CONSTRAINT pk_org_rol
+    CONSTRAINT pk_auth_rol
         PRIMARY KEY (id),
     CONSTRAINT role_unq
         UNIQUE (name)
 );
 
 ALTER TABLE auth.role
-    OWNER TO postgres;*/
+    OWNER TO postgres;
 
-/*CREATE TABLE auth.app_user_role
+CREATE TABLE auth.app_user_role
 (
     user_id UUID   NOT NULL,
     role_id BIGINT NOT NULL,
@@ -56,4 +60,4 @@ ALTER TABLE auth.role
 );
 
 ALTER TABLE auth.app_user_role
-    OWNER TO postgres;*/
+    OWNER TO postgres;

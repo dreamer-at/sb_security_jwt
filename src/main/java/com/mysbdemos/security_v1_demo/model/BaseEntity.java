@@ -1,7 +1,9 @@
 package com.mysbdemos.security_v1_demo.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.sun.istack.Nullable;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
@@ -15,7 +17,7 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Getter(AccessLevel.PUBLIC)
-@Setter(AccessLevel.PROTECTED)
+@Setter(AccessLevel.PUBLIC)
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
 public abstract class BaseEntity implements Serializable {
@@ -29,4 +31,8 @@ public abstract class BaseEntity implements Serializable {
     @LastModifiedDate
     @Column(name = "updated_date", nullable = false)
     protected LocalDateTime updatedDate;
+
+    @Nullable
+    @Builder.Default
+    protected Boolean isEnabled = true;
 }

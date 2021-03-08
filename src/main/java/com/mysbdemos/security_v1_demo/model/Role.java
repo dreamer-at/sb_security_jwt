@@ -1,28 +1,40 @@
 package com.mysbdemos.security_v1_demo.model;
 
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import lombok.*;
+import org.hibernate.annotations.NaturalId;
+import org.springframework.security.core.GrantedAuthority;
 
-import java.util.Set;
-import java.util.stream.Collectors;
+import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+import java.io.Serializable;
 
-public enum Role {
-    USER(Set.of(Permission.USERS_READ)),
-    ADMIN(Set.of(Permission.USERS_READ, Permission.USERS_WRITE));
+@Entity
+@Data
+@EqualsAndHashCode(callSuper = true)
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+@Table(name = "role", schema = "auth")
+public class Role extends BaseEntity implements GrantedAuthority, Serializable {
 
-    private final Set<Permission> permissions;
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "auth.role_id_seq")
+    @SequenceGenerator(name = "auth.role_id_seq", allocationSize = 1)
+    @Column(unique = true, nullable = false, updatable = false)
+    private Long id;
 
-    Role(Set<Permission> permissions) {
-        this.permissions = permissions;
-    }
+    @NaturalId
+    @NotBlank(message = "Role name cannot be blank") // TODO messages props
+    @Column(unique = true, nullable = false)
+    private String name;
 
-    public Set<Permission> getPermissions() {
-        return permissions;
-    }
+    @Size(max = 255, message = "Description should not be greater than 255")
+    private String description;
 
-    public Set<SimpleGrantedAuthority> getAuthorities() {
-        return getPermissions().stream()
-                .map(permission ->
-                        new SimpleGrantedAuthority(permission.getPermission()))
-                .collect(Collectors.toSet());
+
+    @Override
+    public String getAuthority() {
+        return this.name;
     }
 }
